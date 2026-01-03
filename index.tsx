@@ -5,22 +5,26 @@ import App from './App';
 
 const Root = () => {
   useEffect(() => {
-    const handleReveals = () => {
+    // Robust animation handler
+    const initAnimations = () => {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('active');
           }
         });
-      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+      }, { 
+        threshold: 0.05, // Trigger as soon as 5% is visible
+        rootMargin: '0px 0px -20px 0px' 
+      });
 
-      // Observe reveal elements
-      document.querySelectorAll('.reveal, .reveal-zoom, .stagger-container, .portal-reveal-parent').forEach(el => observer.observe(el));
+      // Targets: anything that starts with "reveal" or has "stagger-container"
+      const targets = document.querySelectorAll('[class*="reveal"], .stagger-container, .portal-reveal-parent');
+      targets.forEach(el => observer.observe(el));
       
-      // Handle staggered children explicitly for dynamic content
+      // Explicitly handle stagger delays
       document.querySelectorAll('.stagger-container').forEach(container => {
-        const children = container.children;
-        Array.from(children).forEach((child, i) => {
+        Array.from(container.children).forEach((child, i) => {
           (child as HTMLElement).style.animationDelay = `${(i + 1) * 100}ms`;
         });
       });
@@ -28,11 +32,12 @@ const Root = () => {
       return observer;
     };
 
-    let observer = handleReveals();
+    let observer = initAnimations();
 
+    // Re-bind when DOM changes (navigation/filtering)
     const mutationObserver = new MutationObserver(() => {
       observer.disconnect();
-      observer = handleReveals();
+      observer = initAnimations();
     });
 
     mutationObserver.observe(document.body, { childList: true, subtree: true });
@@ -51,6 +56,9 @@ const Root = () => {
 };
 
 const rootElement = document.getElementById('root');
-if (!rootElement) throw new Error("Root element missing");
-const root = ReactDOM.createRoot(rootElement);
-root.render(<Root />);
+if (rootElement) {
+  const root = ReactDOM.createRoot(rootElement);
+  root.render(<Root />);
+} else {
+  console.error("Critical: Root element not found in DOM");
+}

@@ -58,7 +58,8 @@ const Experience: React.FC = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
       <div className="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-20">
-        <aside className="reveal-left opacity-0 h-fit lg:sticky lg:top-28 space-y-10">
+        {/* Fixed sidebar animation classes */}
+        <aside className="reveal-left h-fit lg:sticky lg:top-28 space-y-10">
           <div className="space-y-4">
             <h1 className="text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">Experience</h1>
             <p className="text-base text-slate-500 dark:text-slate-400">A career defined by strategic execution and high-performance engineering leadership.</p>
@@ -68,7 +69,7 @@ const Experience: React.FC = () => {
             <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:rotate-12 transition-transform">
               <span className="material-symbols-outlined text-6xl">military_tech</span>
             </div>
-            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-blue-400 mb-6">Career Snapshot</p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-blue-400 mb-6 font-mono">Career Snapshot</p>
             <div className="space-y-5">
               <div className="flex justify-between items-center">
                 <span className="text-sm text-slate-400">Force Managed</span>
@@ -83,7 +84,7 @@ const Experience: React.FC = () => {
                 <span className="text-lg font-black">100%</span>
               </div>
             </div>
-            <a href="/cv.pdf" download className="mt-10 flex w-full h-12 items-center justify-center rounded-xl bg-blue-600 text-white text-xs font-bold uppercase tracking-widest transition-all hover:bg-blue-700 hover:scale-105 active:scale-95">
+            <a href="#" download className="mt-10 flex w-full h-12 items-center justify-center rounded-xl bg-blue-600 text-white text-xs font-bold uppercase tracking-widest transition-all hover:bg-blue-700 hover:scale-[1.03] active:scale-95">
               Executive Resume
             </a>
           </div>
@@ -92,7 +93,7 @@ const Experience: React.FC = () => {
         <main className="space-y-20">
           <div className="relative border-l-2 border-slate-100 dark:border-slate-800 ml-5 pl-12 space-y-20">
             {experiences.map((exp, idx) => (
-              <section key={idx} className="reveal-up opacity-0 relative group">
+              <section key={idx} className="reveal-up relative group">
                 <div className="absolute -left-[61px] top-0 size-12 rounded-2xl bg-white dark:bg-slate-900 border-2 border-slate-100 dark:border-slate-800 flex items-center justify-center text-slate-400 group-hover:bg-primary group-hover:text-white group-hover:border-primary transition-all duration-500 shadow-md">
                   <span className="material-symbols-outlined text-2xl">{exp.icon}</span>
                 </div>
