@@ -57,12 +57,12 @@ const Projects: React.FC = () => {
         </p>
       </div>
 
-      <div className="reveal flex flex-wrap gap-2 mb-16 delay-200">
+      <div className="reveal flex flex-wrap gap-2 mb-16">
         {categories.map(cat => (
           <button
             key={cat}
             onClick={() => setFilter(cat)}
-            className={`px-5 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all duration-300 ${
+            className={`px-5 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all duration-300 ${
               filter === cat 
               ? 'bg-primary text-white shadow-xl shadow-primary/20 scale-105' 
               : 'bg-white dark:bg-slate-900 text-slate-500 border border-slate-200 dark:border-slate-800 hover:border-primary/40'
@@ -75,7 +75,7 @@ const Projects: React.FC = () => {
 
       <div key={filter} className="stagger-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filtered.map((p, idx) => (
-          <div key={`${p.title}-${idx}`} className="p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 group hover:shadow-2xl hover:border-primary/20 transition-all duration-500 hover:-translate-y-2">
+          <div key={`${p.title}-${idx}`} className="magnetic-card p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 group hover:border-primary/20 transition-all duration-500">
             <div className="flex items-center justify-between mb-8">
               <div className="size-12 rounded-xl bg-primary/5 text-primary flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all duration-500">
                 <span className="material-symbols-outlined text-2xl">{p.icon}</span>

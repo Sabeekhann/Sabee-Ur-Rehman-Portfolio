@@ -14,14 +14,14 @@ const Root = () => {
         });
       }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-      document.querySelectorAll('.reveal, .reveal-zoom, .stagger-trigger').forEach(el => observer.observe(el));
+      // Observe reveal elements
+      document.querySelectorAll('.reveal, .reveal-zoom, .stagger-container, .portal-reveal-parent').forEach(el => observer.observe(el));
       
-      // Inject stagger indices
+      // Handle staggered children explicitly for dynamic content
       document.querySelectorAll('.stagger-container').forEach(container => {
-        Array.from(container.children).forEach((child, i) => {
-          (child as HTMLElement).style.setProperty('--stagger-index', i.toString());
-          child.classList.add('reveal');
-          observer.observe(child);
+        const children = container.children;
+        Array.from(children).forEach((child, i) => {
+          (child as HTMLElement).style.animationDelay = `${(i + 1) * 100}ms`;
         });
       });
 
